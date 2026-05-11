@@ -1,0 +1,9 @@
+-- 코드를 작성해주세요.
+SELECT P.ID, IFNULL(COUNT(C.ID),0) AS CHILD_COUNT
+FROM ECOLI_DATA AS P
+LEFT JOIN ECOLI_DATA AS C
+-- 자식테이블의 부모 아이디 = 부모 테이블의 아이디
+ON C.PARENT_ID = P.ID
+GROUP BY P.ID
+ORDER BY P.ID;
+
