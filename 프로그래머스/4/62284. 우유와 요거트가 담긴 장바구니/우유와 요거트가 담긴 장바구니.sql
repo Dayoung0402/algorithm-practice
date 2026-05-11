@@ -1,0 +1,15 @@
+SELECT T2.CART_ID
+FROM (
+    SELECT T1.CART_ID AS CART_ID, COUNT(T1.CART_ID) AS COUNT
+    FROM (
+        SELECT CART_ID, NAME
+        FROM CART_PRODUCTS 
+        WHERE NAME = 'Milk'
+        UNION 
+        SELECT CART_ID, NAME
+        FROM CART_PRODUCTS 
+        WHERE NAME = 'Yogurt'
+        ) AS T1
+    GROUP BY T1.CART_ID
+    ) AS T2
+WHERE T2.COUNT >= 2
