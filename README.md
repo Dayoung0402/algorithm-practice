@@ -23,3 +23,11 @@
     algorithm-practice
       - baekjoon
       - programmers sql
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Database
+|  |
+| ------- |
+| [0175-combine-two-tables](https://github.com/Dayoung0402/algorithm-practice/tree/master/0175-combine-two-tables) |
+<!---LeetCode Topics End-->
