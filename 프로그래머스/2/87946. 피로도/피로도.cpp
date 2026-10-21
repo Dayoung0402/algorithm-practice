@@ -13,7 +13,6 @@ void dfs(vector<vector<int>>& dungeons, int count, int k) {
     
     for(int i =0 ; i < dungeons.size(); i++) {
         
-        int least = dungeons[i][0]; // 최소 이 양은 있어야 하고
         int minus = dungeons[i][1]; // 그래서 빠지는 체력
         
             if(!visited[i] && k >= dungeons[i][0]) {
