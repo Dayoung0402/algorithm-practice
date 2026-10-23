@@ -4,18 +4,21 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-vector<int> graph[200+1]; 
+vector<int> graph[200+1];
 bool visited[200+1];
-int answer = 0;
 
 void dfs(int cur) {
     
-    for(int next : graph[cur]){
-        if(!visited[next]){
+    visited[cur] = true;
+    
+    for(int next : graph[cur]) {
+        if(!visited[next]) {
             visited[next] = true;
             dfs(next);
+            
         }
     }
+    
 }
 
 int solution(int n, vector<vector<int>> computers) {
@@ -23,17 +26,25 @@ int solution(int n, vector<vector<int>> computers) {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     
-   //일단 그래프에 집어넣어서 보기 좋게
-    for(int i = 0; i< n; i++) {
-        for(int j = i+1; j < n; j++) {
+    int answer = 0;
+    int len_com = computers.size();
+    
+    // 양방향 그래프로 표현
+    for(int i = 0; i < len_com; i++) {
+        for(int j = 0; j < len_com; j++) {
             if(computers[i][j] == 1) {
-                graph[i].push_back(j);
-                graph[j].push_back(i);
-            }            
+                int first = i+1;
+                int second = j+1;
+                
+                graph[first].push_back(second);
+                graph[second].push_back(first);
+                
+            }
         }
+        
     }
     
-    for(int i = 0; i< n; i++) {
+    for(int i = 1; i <= len_com; i++) {
         if(!visited[i]) {
             answer++;
             dfs(i);
