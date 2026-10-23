@@ -12,7 +12,7 @@ int solution(int n, vector<vector<int>> costs) {
     
     int answer = 0; // 최소 비용
     int len = costs.size(); 
-    int node_num;
+    //int node_num;
     bool visited[100+1]= {0};
     set<int> s;
     vector<pair<int,int>> graph[100]; // graph[0] = {(1,1), (2,2)}
@@ -21,11 +21,11 @@ int solution(int n, vector<vector<int>> costs) {
         graph[costs[i][0]].push_back({costs[i][1], costs[i][2]}); // grahp[0] = {(1,1)}
         graph[costs[i][1]].push_back({costs[i][0], costs[i][2]}); // grahp[1] = {(0,1)} 
         
-        s.insert(costs[i][0]);
-        s.insert(costs[i][1]);
+        //s.insert(costs[i][0]);
+        //s.insert(costs[i][1]);
     }
     
-    node_num = s.size(); // 4 (진짜 노드 개수)
+    //node_num = s.size(); // 4 (진짜 노드 개수)
     
     priority_queue<
     pair<int,int>,
