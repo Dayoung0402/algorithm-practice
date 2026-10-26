@@ -11,38 +11,34 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
     cin.tie(NULL);
     
     vector<int> answer;
-    int len = progresses.size();
     
+    // 남은 날짜 수 계산 
     vector<int> days;
-    for(int i = 0; i < len; i++) {
-        int day = (100 - progresses[i]) % speeds[i];
-        if(day == 0) {
-            days.push_back((100 - progresses[i]) / speeds[i]); // 7
-        }else {
-            days.push_back((100 - progresses[i]) / speeds[i] + 1); // 3
-        }
-    } // 반복문이 다 돌면 [7,3,9] 필요한 작업 일수가 담긴다.
-    
-    // [7,3,9] -> [2,1]
-    // [5,10,1,1,20,1] -> [1,3,2]
-    
-    int standard = days[0];
-    int count = 1;
-    
-    for(int i = 1 ; i < len; i++) { // 3 -> 4
-        if(standard < days[i]) {
-            standard = days[i];
-            answer.push_back(count);
-            count = 1; // 다시 1로 초기화
-        }
-        else { // 7 -> 3
-            count++;            
-        }
+    for(int i = 0; i < progresses.size(); i++) {
+        int remain = 100 - progresses[i];
+        if(remain % speeds[i] == 0) {
+            days.push_back((remain / speeds[i]));
+        } else days.push_back((remain / speeds[i]) + 1);
     }
     
-    answer.push_back(count);
+    stack<int> st;
+    for(int i = progresses.size()-1; i >= 0; i--) {
+        st.push(days[i]);
+    } // 9,3,7순서로 스택에 넣고
     
-    
+    while(!st.empty()) {
+        
+        int count = 1;
+        int check = st.top();
+        st.pop();
+        
+        while(!st.empty() && check >= st.top()) {
+            count++;
+            st.pop();
+        }
+        
+        answer.push_back(count);
+    }
     
     
     return answer;
